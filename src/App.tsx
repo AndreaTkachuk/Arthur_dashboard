@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Dashboard from "./pages/Dashboard"
-// import AccountDetails from "./pages/AccountDetails"
 import Layout from "./components/Layout"
+import AccountDetails from "./pages/AccountDetails"
 
 function App() {
   return (
@@ -15,14 +15,14 @@ function App() {
             </Layout>
           }
         />
-        {/* <Route
+        <Route
           path="/accounts/:id"
           element={
             <Layout>
               <AccountDetails />
             </Layout>
           }
-        /> */}
+        />
       </Routes>
     </Router>
   )

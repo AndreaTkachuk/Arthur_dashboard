@@ -1,16 +1,22 @@
-
-import { Link } from "react-router-dom"
-import { Plus, CircleEllipsis } from "lucide-react"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { mockWorkQueue, mockAccounts } from "@/data/mockData"
-import PortfolioGoals from "@/components/PortfolioGoals"
+import { Link } from "react-router-dom";
+import { Plus, CircleEllipsis } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { mockWorkQueue, mockAccounts } from "@/data/mockData";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import PortfolioGoals from "@/components/PortfolioGoals";
 
 const Dashboard = () => {
-  const pendingQueue = mockWorkQueue.filter((item) => item.status === "Pending Review")
-  const referralsQueue = mockWorkQueue.filter((item) => item.status === "New")
+  const pendingQueue = mockWorkQueue.filter(
+    (item) => item.status === "Pending Review"
+  );
+  const referralsQueue = mockWorkQueue.filter((item) => item.status === "New");
 
   return (
     <div className="container mx-auto space-y-6">
@@ -24,20 +30,20 @@ const Dashboard = () => {
             <CardContent>
               <Tabs defaultValue="assigned">
                 <TabsList className="mb-4 gap-2 bg-secondary">
-                  <TabsTrigger 
-                    value="assigned" 
+                  <TabsTrigger
+                    value="assigned"
                     className="rounded-full bg-black data-[state=active]:bg-primary cursor-pointer"
                   >
                     {`Assigned to me (${mockWorkQueue.length})`}
                   </TabsTrigger>
-                  <TabsTrigger 
-                    value="pending" 
+                  <TabsTrigger
+                    value="pending"
                     className="rounded-full bg-black data-[state=active]:bg-primary cursor-pointer"
                   >
                     Pending Review ({pendingQueue.length})
                   </TabsTrigger>
-                  <TabsTrigger 
-                    value="referrals" 
+                  <TabsTrigger
+                    value="referrals"
                     className="rounded-full bg-black data-[state=active]:bg-primary cursor-pointer"
                   >
                     Referrals ({referralsQueue.length})
@@ -59,37 +65,74 @@ const Dashboard = () => {
                       </thead>
                       <tbody>
                         {mockWorkQueue.map((item) => (
-                          <tr key={item.id} className={`${item.id % 2 === 0 ? "bg-[#252A3D] border-t border-b" : ""}`}>
+                          <tr
+                            key={item.id}
+                            className={`${
+                              item.id % 2 === 0
+                                ? "bg-[#252A3D] border-t border-b"
+                                : ""
+                            }`}
+                          >
                             <td className="py-3 pl-2">
                               <div className="flex items-center gap-2">
                                 <div className="w-6 h-6 rounded-full bg-primary-foreground flex items-center justify-center text-xs">
                                   {item.originatorInitials}
                                 </div>
-                                <span className="leading-none">{item.originator}</span>
+                                <span className="leading-none">
+                                  {item.originator}
+                                </span>
                               </div>
                             </td>
                             <td className="py-3">
                               <div>
-                                <div className="leading-none">{item.client}</div>
-                                <div className="text-sm text-gray-400">{item.line}</div>
+                                <div className="leading-none">
+                                  {item.client}
+                                </div>
+                                <div className="text-sm text-gray-400">
+                                  {item.line}
+                                </div>
                               </div>
                             </td>
                             <td className="py-3 leading-none">{item.type}</td>
                             <td className="py-3 text-sm">
                               <div className="flex items-center gap-1 h-full">
-                                <span className={`block w-2 h-2 rounded-full
-                                  ${item.status === 'New' && "bg-chart-1"}
-                                  ${item.status === 'Pending Review' && "bg-chart-3"}
-                                  ${item.status === 'Completed' && "bg-chart-2"}
-                                `}></span>
+                                <span
+                                  className={`block w-2 h-2 rounded-full
+                                  ${item.status === "New" && "bg-chart-1"}
+                                  ${
+                                    item.status === "Pending Review" &&
+                                    "bg-chart-3"
+                                  }
+                                  ${item.status === "Completed" && "bg-chart-2"}
+                                `}
+                                ></span>
                                 <span>{item.status}</span>
                               </div>
                             </td>
                             <td className="py-3">{item.created}</td>
                             <td className="py-3">
-                              <Button variant="ghost" size="icon">
-                                <CircleEllipsis size={16} className="rotate-90" />
-                              </Button>
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <Button variant="ghost" size="icon">
+                                    <CircleEllipsis
+                                      size={16}
+                                      className="rotate-90"
+                                    />
+                                  </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-40">
+                                  <div className="grid gap-4">
+                                    <div className="space-y-2">
+                                      <h4 className="font-medium leading-none">
+                                        Note
+                                      </h4>
+                                      <p className="text-sm text-muted-foreground">
+                                        Coming soon...
+                                      </p>
+                                    </div>
+                                  </div>
+                                </PopoverContent>
+                              </Popover>
                             </td>
                           </tr>
                         ))}
@@ -113,37 +156,74 @@ const Dashboard = () => {
                       </thead>
                       <tbody>
                         {pendingQueue.map((item) => (
-                          <tr key={item.id} className={`${item.id % 2 === 0 ? "bg-[#252A3D] border-t border-b" : ""}`}>
+                          <tr
+                            key={item.id}
+                            className={`${
+                              item.id % 2 === 0
+                                ? "bg-[#252A3D] border-t border-b"
+                                : ""
+                            }`}
+                          >
                             <td className="py-3 pl-2">
                               <div className="flex items-center gap-2">
                                 <div className="w-6 h-6 rounded-full bg-primary-foreground flex items-center justify-center text-xs">
                                   {item.originatorInitials}
                                 </div>
-                                <span className="leading-none">{item.originator}</span>
+                                <span className="leading-none">
+                                  {item.originator}
+                                </span>
                               </div>
                             </td>
                             <td className="py-3">
                               <div>
-                                <div className="leading-none">{item.client}</div>
-                                <div className="text-sm text-gray-400">{item.line}</div>
+                                <div className="leading-none">
+                                  {item.client}
+                                </div>
+                                <div className="text-sm text-gray-400">
+                                  {item.line}
+                                </div>
                               </div>
                             </td>
                             <td className="py-3 leading-none">{item.type}</td>
                             <td className="py-3 text-sm">
                               <div className="flex items-center gap-1">
-                                <span className={`block w-2 h-2 rounded-full
-                                  ${item.status === 'New' && "bg-chart-1"}
-                                  ${item.status === 'Pending Review' && "bg-chart-3"}
-                                  ${item.status === 'Completed' && "bg-chart-2"}
-                                `}></span>
+                                <span
+                                  className={`block w-2 h-2 rounded-full
+                                  ${item.status === "New" && "bg-chart-1"}
+                                  ${
+                                    item.status === "Pending Review" &&
+                                    "bg-chart-3"
+                                  }
+                                  ${item.status === "Completed" && "bg-chart-2"}
+                                `}
+                                ></span>
                                 <span>{item.status}</span>
                               </div>
                             </td>
                             <td className="py-3">{item.created}</td>
                             <td className="py-3">
-                              <Button variant="ghost" size="icon">
-                                <CircleEllipsis size={16} className="rotate-90" />
-                              </Button>
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <Button variant="ghost" size="icon">
+                                    <CircleEllipsis
+                                      size={16}
+                                      className="rotate-90"
+                                    />
+                                  </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-40">
+                                  <div className="grid gap-4">
+                                    <div className="space-y-2">
+                                      <h4 className="font-medium leading-none">
+                                        Note
+                                      </h4>
+                                      <p className="text-sm text-muted-foreground">
+                                        Coming soon...
+                                      </p>
+                                    </div>
+                                  </div>
+                                </PopoverContent>
+                              </Popover>
                             </td>
                           </tr>
                         ))}
@@ -167,37 +247,74 @@ const Dashboard = () => {
                       </thead>
                       <tbody>
                         {referralsQueue.map((item) => (
-                          <tr key={item.id} className={`${item.id % 2 === 0 ? "bg-[#252A3D] border-t border-b" : ""}`}>
+                          <tr
+                            key={item.id}
+                            className={`${
+                              item.id % 2 === 0
+                                ? "bg-[#252A3D] border-t border-b"
+                                : ""
+                            }`}
+                          >
                             <td className="py-3 pl-2">
                               <div className="flex items-center gap-2">
                                 <div className="w-6 h-6 rounded-full bg-primary-foreground flex items-center justify-center text-xs">
                                   {item.originatorInitials}
                                 </div>
-                                <span className="leading-none">{item.originator}</span>
+                                <span className="leading-none">
+                                  {item.originator}
+                                </span>
                               </div>
                             </td>
                             <td className="py-3">
                               <div>
-                                <div className="leading-none">{item.client}</div>
-                                <div className="text-sm text-gray-400">{item.line}</div>
+                                <div className="leading-none">
+                                  {item.client}
+                                </div>
+                                <div className="text-sm text-gray-400">
+                                  {item.line}
+                                </div>
                               </div>
                             </td>
                             <td className="py-3 leading-none">{item.type}</td>
                             <td className="py-3 text-sm">
                               <div className="flex items-center gap-1">
-                                <span className={`block w-2 h-2 rounded-full
-                                  ${item.status === 'New' && "bg-chart-1"}
-                                  ${item.status === 'Pending Review' && "bg-chart-3"}
-                                  ${item.status === 'Completed' && "bg-chart-2"}
-                                `}></span>
+                                <span
+                                  className={`block w-2 h-2 rounded-full
+                                  ${item.status === "New" && "bg-chart-1"}
+                                  ${
+                                    item.status === "Pending Review" &&
+                                    "bg-chart-3"
+                                  }
+                                  ${item.status === "Completed" && "bg-chart-2"}
+                                `}
+                                ></span>
                                 <span>{item.status}</span>
                               </div>
                             </td>
                             <td className="py-3">{item.created}</td>
                             <td className="py-3">
-                              <Button variant="ghost" size="icon">
-                                <CircleEllipsis size={16} className="rotate-90" />
-                              </Button>
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <Button variant="ghost" size="icon">
+                                    <CircleEllipsis
+                                      size={16}
+                                      className="rotate-90"
+                                    />
+                                  </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-40">
+                                  <div className="grid gap-4">
+                                    <div className="space-y-2">
+                                      <h4 className="font-medium leading-none">
+                                        Note
+                                      </h4>
+                                      <p className="text-sm text-muted-foreground">
+                                        Coming soon...
+                                      </p>
+                                    </div>
+                                  </div>
+                                </PopoverContent>
+                              </Popover>
                             </td>
                           </tr>
                         ))}
@@ -210,133 +327,122 @@ const Dashboard = () => {
           </Card>
         </div>
 
-          {/* Portfolio Goals */}
-          {/* <Card className="bg-secondary xl:col-span-3 row-span-2 hover:border-primary-foreground">
-            <CardHeader>
-              <CardTitle>Portfolio goals</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
+        {/* Portfolio Goals */}
+
+        <PortfolioGoals />
+
+        {/* Quick Actions */}
+        <Card className="bg-secondary xl:col-span-3 xl:col-rows-1 hover:border-primary-foreground">
+          <CardHeader>
+            <CardTitle>Quick actions</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button className="w-full bg-primary rounded-full text-[#B6B9C3] cursor-pointer hover:bg-primary/90">
+                  New Submission
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-40">
+                <div className="grid gap-4">
+                  <div className="space-y-2">
+                    <h4 className="font-medium leading-none">Note</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Coming soon...
+                    </p>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button className="w-full bg-primary rounded-full text-[#B6B9C3] cursor-pointer hover:bg-primary/90">
+                  Quote Builder
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-40">
+                <div className="grid gap-4">
+                  <div className="space-y-2">
+                    <h4 className="font-medium leading-none">Note</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Coming soon...
+                    </p>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button className="w-full bg-primary rounded-full text-[#B6B9C3] cursor-pointer hover:bg-primary/90">
+                  Risks Models
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-40">
+                <div className="grid gap-4">
+                  <div className="space-y-2">
+                    <h4 className="font-medium leading-none">Note</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Coming soon...
+                    </p>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button className="w-full bg-primary rounded-full text-[#B6B9C3] cursor-pointer hover:bg-primary/90">
+                  Documents Upload
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-40">
+                <div className="grid gap-4">
+                  <div className="space-y-2">
+                    <h4 className="font-medium leading-none">Note</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Coming soon...
+                    </p>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
+          </CardContent>
+        </Card>
+
+        {/* Market Intelligence */}
+        <Card className="bg-secondary xl:col-span-3 xl:col-rows-2 gap-4 hover:border-primary-foreground">
+          <CardHeader>
+            <CardTitle>Market intelligence</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <div className="flex items-start gap-3 text-[#9B9EAB] border-b pb-[5px]">
+              <div className="w-4 h-4 rounded-full bg-chart-5 shrink-0"></div>
               <div>
-                <div className="flex justify-between text-xs mb-1">
-                  <span className="text-gray-400">PORTFOLIO LOSS RATIO TARGET</span>
-                  <span className="font-medium">68%</span>
-                </div>
-                <div className="relative pt-1">
-                  <div className="flex mb-2 items-center justify-between">
-                    <div className="w-full bg-gray-700 rounded-full h-2">
-                      <div className="flex h-full rounded-full">
-                        <div className="w-[60%] bg-success rounded-l-full"></div>
-                        <div className="w-[20%] bg-warning"></div>
-                        <div className="w-[20%] bg-danger rounded-r-full"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-xs text-gray-400">
-                    <span>ACTUAL: 58.8% (GOOD)</span>
-                  </div>
-                </div>
+                <p className="font-medium">
+                  Rate hardening in Cyber market - +15% YoY
+                </p>
               </div>
-
+            </div>
+            <div className="flex items-start gap-3 text-[#9B9EAB] border-b pb-[5px]">
+              <div className="w-4 h-4 rounded-full bg-chart-3 shrink-0"></div>
               <div>
-                <div className="flex justify-between text-xs mb-1">
-                  <span className="text-gray-400">RENEWAL RETENTION</span>
-                  <span className="font-medium">85%</span>
-                </div>
-                <div className="relative pt-1">
-                  <div className="flex mb-2 items-center justify-between">
-                    <div className="w-full bg-gray-700 rounded-full h-2">
-                      <div className="flex h-full rounded-full">
-                        <div className="w-[30%] bg-danger rounded-l-full"></div>
-                        <div className="w-[40%] bg-warning"></div>
-                        <div className="w-[30%] bg-success rounded-r-full"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-xs text-gray-400">
-                    <span>ON TARGET</span>
-                  </div>
-                </div>
+                <p className="font-medium">
+                  New capacity entering Marine market
+                </p>
               </div>
-
+            </div>
+            <div className="flex items-start gap-3 text-[#9B9EAB] border-b pb-[5px]">
+              <div className="w-4 h-4 rounded-full bg-chart-1 shrink-0"></div>
               <div>
-                <div className="flex justify-between text-xs mb-1">
-                  <span className="text-gray-400">NEW BUSINESS TARGET</span>
-                  <span className="font-medium">$12M</span>
-                </div>
-                <div className="relative pt-1">
-                  <div className="flex mb-2 items-center justify-between">
-                    <div className="w-full bg-gray-700 rounded-full h-2">
-                      <div className="w-[75%] bg-primary rounded-full h-full"></div>
-                    </div>
-                  </div>
-                  <div className="flex justify-between text-xs text-gray-400">
-                    <span>$9.1M</span>
-                    <span>$12M</span>
-                  </div>
-                </div>
+                <p className="font-medium">
+                  Environmental regulatory changes in CA
+                </p>
               </div>
-
-              <div>
-                <div className="flex justify-between text-xs mb-1">
-                  <span className="text-gray-400">ANNUAL GWP TARGET</span>
-                  <span className="font-medium">$42M</span>
-                </div>
-                <div className="relative pt-1">
-                  <div className="flex mb-2 items-center justify-between">
-                    <div className="w-full bg-gray-700 rounded-full h-2">
-                      <div className="w-[65%] bg-primary rounded-full h-full"></div>
-                    </div>
-                  </div>
-                  <div className="flex justify-between text-xs text-gray-400">
-                    <span>$28.4M</span>
-                    <span>$42M</span>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card> */}
-          
-          <PortfolioGoals />
-
-          {/* Quick Actions */}
-          <Card className="bg-secondary xl:col-span-3 xl:col-rows-1 hover:border-primary-foreground">
-            <CardHeader>
-              <CardTitle>Quick actions</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <Button className="w-full bg-primary rounded-full text-[#B6B9C3] cursor-pointer hover:bg-primary/90">New Submission</Button>
-              <Button className="w-full bg-primary rounded-full text-[#B6B9C3] cursor-pointer hover:bg-primary/90">Quote Builder</Button>
-              <Button className="w-full bg-primary rounded-full text-[#B6B9C3] cursor-pointer hover:bg-primary/90">Risks Models</Button>
-              <Button className="w-full bg-primary rounded-full text-[#B6B9C3] cursor-pointer hover:bg-primary/90">Documents Upload</Button>
-            </CardContent>
-          </Card>
-
-          {/* Market Intelligence */}
-          <Card className="bg-secondary xl:col-span-3 xl:col-rows-2 gap-4 hover:border-primary-foreground">
-            <CardHeader>
-              <CardTitle>Market intelligence</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="flex items-start gap-3 text-[#9B9EAB] border-b pb-[5px]">
-                <div className="w-4 h-4 rounded-full bg-chart-5 shrink-0"></div>
-                <div>
-                  <p className="font-medium">Rate hardening in Cyber market - +15% YoY</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 text-[#9B9EAB] border-b pb-[5px]">
-                <div className="w-4 h-4 rounded-full bg-chart-3 shrink-0"></div>
-                <div>
-                  <p className="font-medium">New capacity entering Marine market</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 text-[#9B9EAB] border-b pb-[5px]">
-                <div className="w-4 h-4 rounded-full bg-chart-1 shrink-0"></div>
-                <div>
-                  <p className="font-medium">Environmental regulatory changes in CA</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          </CardContent>
+        </Card>
         {/* </div> */}
       </div>
 
@@ -355,19 +461,64 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" className="w-22 flex items-center gap-1 rounded-full text-primary border-primary">
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-22 flex items-center gap-1 rounded-full text-primary border-primary"
+              >
                 <span>Filter</span>
               </Button>
-              <Button variant="outline" size="sm" className="w-22 flex items-center gap-1 rounded-full text-primary border-primary">
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-22 flex items-center gap-1 rounded-full text-primary border-primary"
+              >
                 <span>Sort</span>
               </Button>
-              <Button variant="outline" size="sm" className="w-22 rounded-full text-primary border-primary">
-                Group
-              </Button>
-              <Button size="sm" className="w-22 bg-primary hover:bg-primary/90 rounded-full text-foreground gap-0">
-                <Plus size={14} className="mr-1" />
-                <span>New</span>
-              </Button>
+
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-22 rounded-full text-primary border-primary cursor-pointer"
+                  >
+                    Group
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-40">
+                  <div className="grid gap-4">
+                    <div className="space-y-2">
+                      <h4 className="font-medium leading-none">Note</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Coming soon...
+                      </p>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
+
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    size="sm"
+                    className="w-22 bg-primary hover:bg-primary/90 rounded-full text-foreground gap-0 cursor-pointer"
+                  >
+                    <Plus size={14} className="mr-1" />
+                    <span>New</span>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-40">
+                  <div className="grid gap-4">
+                    <div className="space-y-2">
+                      <h4 className="font-medium leading-none">Note</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Coming soon...
+                      </p>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
         </CardHeader>
@@ -376,7 +527,9 @@ const Dashboard = () => {
             <table className="w-full">
               <thead>
                 <tr className="text-xs text-gray-400 uppercase bg-[#252A3D]">
-                  <th className="text-left py-2 pr-1 pl-4">Account Name/Type</th>
+                  <th className="text-left py-2 pr-1 pl-4">
+                    Account Name/Type
+                  </th>
                   <th className="text-left py-2 pr-1">Line</th>
                   <th className="text-left py-2 pr-1">Broker</th>
                   <th className="text-left py-2 pr-1">Renewal Date</th>
@@ -392,29 +545,49 @@ const Dashboard = () => {
               </thead>
               <tbody>
                 {mockAccounts.map((account) => (
-                  <tr key={account.id} className={`${account.id % 2 === 0 ? "bg-[#252A3D] border-t border-b" : ""}`}>
+                  <tr
+                    key={account.id}
+                    className={`${
+                      account.id % 2 === 0
+                        ? "bg-[#252A3D] border-t border-b"
+                        : ""
+                    }`}
+                  >
                     <td className="py-3 pr-1">
-                      <Link to={`/accounts/${account.id}`} className="hover:text-primary transition-all duration-200">
-                        <div className="pl-4 font-medium leading-none">{account.name}</div>
-                        <div className="pl-4 text-sm text-gray-400">{account.type}</div>
+                      <Link
+                        to={`/accounts/${account.id}`}
+                        className="hover:text-primary transition-all duration-200"
+                      >
+                        <div className="pl-4 font-medium leading-none">
+                          {account.name}
+                        </div>
+                        <div className="pl-4 text-sm text-gray-400">
+                          {account.type}
+                        </div>
                       </Link>
                     </td>
                     <td className="py-3 pr-1 leading-none">{account.line}</td>
                     <td className="py-3 pr-1 leading-none">{account.broker}</td>
                     <td className="py-3 pr-1">{account.renewalDate}</td>
-                    <td className="py-3 pr-1 text-primary">{account.premium}</td>
+                    <td className="py-3 pr-1 text-primary">
+                      {account.premium}
+                    </td>
                     <td className="py-3 pr-1">{account.ratedPremium}</td>
                     <td className="py-3 pr-1">
                       <Badge
-                        className={`rounded-sm text-xs px-2 text-foreground rounded-full ${account.lossRatio < 35 ? "bg-chart-2" : account.lossRatio < 60 ? "bg-chart-3" : "bg-chart-5"}`}
+                        className={`rounded-sm text-xs px-2 text-foreground rounded-full ${
+                          account.lossRatio < 35
+                            ? "bg-chart-2"
+                            : account.lossRatio < 60
+                            ? "bg-chart-3"
+                            : "bg-chart-5"
+                        }`}
                       >
                         {account.lossRatio}%
                       </Badge>
                     </td>
                     <td className="py-3 pr-2 uppercase text-xs font-medium">
-                      <Badge
-                        className="rounded-sm text-xs px-2 w-full bg-primary-foreground rounded-full text-foreground"
-                      >
+                      <Badge className="rounded-sm text-xs px-2 w-full bg-primary-foreground rounded-full text-foreground">
                         {account.appetite}
                       </Badge>
                     </td>
@@ -425,8 +598,8 @@ const Dashboard = () => {
                             account.status === "Active"
                               ? "bg-chart-2"
                               : account.status === "Under review"
-                                ? "bg-chart-1"
-                                : "bg-chart-5"
+                              ? "bg-chart-1"
+                              : "bg-chart-5"
                           }`}
                         ></div>
                         <span>{account.status}</span>
@@ -443,17 +616,39 @@ const Dashboard = () => {
                           <div
                             key={i}
                             className={`w-2 h-2 rounded-full ${
-                              i < account.winnabilityScore ? "bg-primary" : "bg-gray-700"
+                              i < account.winnabilityScore
+                                ? "bg-primary"
+                                : "bg-gray-700"
                             }`}
                           ></div>
                         ))}
-                        <span className="ml-1 text-xs text-primary">{account.winnability}</span>
+                        <span className="ml-1 text-xs text-primary">
+                          {account.winnability}
+                        </span>
                       </div>
                     </td>
                     <td className="py-3">
-                      <Button variant="ghost" size="icon">
-                        <CircleEllipsis size={16} className="rotate-90" />
-                      </Button>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="cursor-pointer"
+                          >
+                            <CircleEllipsis size={16} className="rotate-90" />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-40">
+                          <div className="grid gap-4">
+                            <div className="space-y-2">
+                              <h4 className="font-medium leading-none">Note</h4>
+                              <p className="text-sm text-muted-foreground">
+                                Coming soon...
+                              </p>
+                            </div>
+                          </div>
+                        </PopoverContent>
+                      </Popover>
                     </td>
                   </tr>
                 ))}
@@ -463,7 +658,7 @@ const Dashboard = () => {
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
