@@ -19,7 +19,7 @@ export default function WorkQueue() {
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="assigned">
-            <TabsList className="mb-4 gap-2 bg-secondary">
+            <TabsList className="mb-4 gap-2 bg-secondary flex-wrap">
               <TabsTrigger
                 value="assigned"
                 className="rounded-full bg-black data-[state=active]:bg-primary cursor-pointer"
@@ -40,7 +40,7 @@ export default function WorkQueue() {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="assigned" className="m-0">
+            <TabsContent value="assigned" className="mt-4 sm:m-0">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
@@ -129,7 +129,7 @@ export default function WorkQueue() {
               </div>
             </TabsContent>
 
-            <TabsContent value="pending" className="m-0">
+            <TabsContent value="pending" className="mt-4 sm:m-0">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
@@ -218,7 +218,7 @@ export default function WorkQueue() {
               </div>
             </TabsContent>
 
-            <TabsContent value="referrals" className="m-0">
+            <TabsContent value="referrals" className="mt-4 sm:m-0">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>

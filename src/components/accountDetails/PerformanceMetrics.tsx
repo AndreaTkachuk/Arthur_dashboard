@@ -10,8 +10,8 @@ const distributionData = {
 
 export default function PerformanceMetrics() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <p className="col-span-4">Performance Metrics</p>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <p className="col-span-2 md:col-span-4">Performance Metrics</p>
       <Card className="bg-secondary py-0 hover:border-primary-foreground">
         <CardContent className="p-4">
           <div className="flex items-center gap-4 mb-2">
@@ -70,35 +70,41 @@ export default function PerformanceMetrics() {
             <p className="text-sm">Exposure Distribution</p>
           </div>
           <div className="space-y-2 mt-2">
-            <div className="h-4 flex items-center flex-col xl:flex-row xl:gap-4">
-              <ProgressBar
-                value={distributionData.marineCargo}
-                total={100}
-                color="bg-gradient-to-r from-gray-700 to-blue-500"
-              />
+            <div className="flex items-center flex-col xl:flex-row xl:gap-4">
+              <div className="h-4 w-full">
+                <ProgressBar
+                  value={distributionData.marineCargo}
+                  total={100}
+                  color="bg-gradient-to-r from-gray-700 to-blue-500"
+                />
+              </div>
               <div className="w-full flex gap-1 text-xs mb-1">
                 <span className="shrink-0">Marine Cargo:</span>
                 <span>{distributionData.marineCargo}%</span>
               </div>
             </div>
-            <div className="h-4 flex items-center flex-col xl:flex-row xl:gap-4">
-              <ProgressBar
-                value={distributionData.generalLiability}
-                total={100}
-                color="bg-gradient-to-r from-gray-700 to-blue-500"
-              />
+            <div className="flex items-center flex-col xl:flex-row xl:gap-4">
+              <div className="h-4 w-full">
+                <ProgressBar
+                  value={distributionData.generalLiability}
+                  total={100}
+                  color="bg-gradient-to-r from-gray-700 to-blue-500"
+                />
+              </div>
               <div className="w-full flex gap-1 text-xs mb-1">
                 <span className="shrink-0">General Liability:</span>
                 <span>{distributionData.generalLiability}%</span>
               </div>
             </div>
 
-            <div className="h-4 flex items-center flex-col xl:flex-row xl:gap-4">
-              <ProgressBar
-                value={distributionData.workersComp}
-                total={100}
-                color="bg-gradient-to-r from-gray-700 to-blue-500"
-              />
+            <div className="flex items-center flex-col xl:flex-row xl:gap-4">
+              <div className="h-4 w-full">
+                <ProgressBar
+                  value={distributionData.workersComp}
+                  total={100}
+                  color="bg-gradient-to-r from-gray-700 to-blue-500"
+                />
+              </div>
               <div className="w-full flex gap-1 text-xs mb-1">
                 <span className="shrink-0">Workers Comp:</span>
                 <span>{distributionData.workersComp}%</span>

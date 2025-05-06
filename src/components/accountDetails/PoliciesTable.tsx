@@ -9,8 +9,8 @@ export default function PoliciesTable() {
   return (
     <Card className="bg-secondary hover:border-primary-foreground">
       <CardHeader>
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
+        <div className="">
+          <div className="flex items-center flex-wrap gap-2">
             <div className="relative">
               <input
                 type="text"
@@ -18,48 +18,50 @@ export default function PoliciesTable() {
                 className="bg-accent text-accent-foreground pl-3 pr-10 py-1 rounded-full"
               />
             </div>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-25 bg-secondary border-primary text-primary hover:text-foreground rounded-full"
-                >
-                  <span>Filter</span>
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-40">
-                <div className="grid gap-4">
-                  <div className="space-y-2">
-                    <h4 className="font-medium leading-none">Note</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Coming soon...
-                    </p>
+            <div className="flex gap-2">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-25 bg-secondary border-primary text-primary hover:text-foreground rounded-full"
+                  >
+                    <span>Filter</span>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-40">
+                  <div className="grid gap-4">
+                    <div className="space-y-2">
+                      <h4 className="font-medium leading-none">Note</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Coming soon...
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </PopoverContent>
-            </Popover>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-25 bg-secondary border-primary text-primary hover:text-foreground rounded-full"
-                >
-                  <span>Group</span>
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-40">
-                <div className="grid gap-4">
-                  <div className="space-y-2">
-                    <h4 className="font-medium leading-none">Note</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Coming soon...
-                    </p>
+                </PopoverContent>
+              </Popover>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-25 bg-secondary border-primary text-primary hover:text-foreground rounded-full"
+                  >
+                    <span>Group</span>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-40">
+                  <div className="grid gap-4">
+                    <div className="space-y-2">
+                      <h4 className="font-medium leading-none">Note</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Coming soon...
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </PopoverContent>
-            </Popover>
+                </PopoverContent>
+              </Popover>
+            </div>
           </div>
         </div>
       </CardHeader>

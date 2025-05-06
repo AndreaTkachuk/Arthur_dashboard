@@ -48,9 +48,9 @@ const Navbar = () => {
 
   return (
     <header className="pt-4">
-      <div className="container mx-auto">
-        <div className="flex items-center justify-between border-b border-border pb-[22px]">
-          <h1 className="text-xl font-semibold">
+      <div className="container mx-auto pl-2">
+        <div className="sm:flex items-center justify-between border-b border-border pb-[22px] ">
+          <h1 className="text-xl font-semibold mb-2 sm:mb-0">
             Hi Arthur, welcome! You have {mockWorkQueue.length} open tasks.
           </h1>
           <div className="flex items-center gap-4">

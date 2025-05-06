@@ -9,7 +9,7 @@ export default function Communication() {
     <Card className="bg-secondary hover:border-primary-foreground">
       <CardHeader>
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <div className="relative">
               <input
                 type="text"

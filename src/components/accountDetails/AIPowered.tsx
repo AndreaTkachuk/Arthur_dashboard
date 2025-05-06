@@ -11,7 +11,7 @@ export default function AIPowered() {
       </div>
 
       <div className="space-y-4">
-        <div className="flex items-center gap-2 mb-4">
+        <div className="flex items-center gap-2 mb-4 flex-wrap md:flex-nowrap">
           <div>
             <p className="">
               Offer 5% premium discount in exchange for 3-year commitment
@@ -40,7 +40,7 @@ export default function AIPowered() {
             </PopoverContent>
           </Popover>
         </div>
-        <div className="flex items-center gap-2 mb-4">
+        <div className="flex items-center gap-2 mb-4 flex-wrap md:flex-nowrap">
           <div>
             <p className="">
               Propose risk control services for cargo handling procedures
