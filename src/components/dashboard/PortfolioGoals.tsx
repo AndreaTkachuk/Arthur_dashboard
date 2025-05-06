@@ -1,28 +1,5 @@
-import { portfolioData } from "../data/mockData";
-
-const ProgressBar = ({
-  value,
-  total,
-  color,
-  text,
-}: {
-  value: number;
-  total: number;
-  color: string;
-  text: string;
-}) => {
-  const percentage = (value / total) * 100;
-  return (
-    <div className="w-full bg-slate-700 rounded-e-full overflow-hidden">
-      <div
-        className={`h-full ${color} text-end rounded-e-full pr-2 text-xl`}
-        style={{ width: `${percentage}%` }}
-      >
-        {text}
-      </div>
-    </div>
-  );
-};
+import { portfolioData } from "../../data/mockData";
+import { ProgressBar } from "../ProgressBar";
 
 export default function PortfolioGoals() {
   const { lossRatio, renewalRetention, newBusinessTarget, annualGwpTarget } =
